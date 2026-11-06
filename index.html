@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMART CITY - Thành phố tương lai</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: Arial, sans-serif;
+    background: #061522;
+    color: white;
+    overflow-x: hidden;
+}
+
+:root {
+    --blue: #31e5ee;
+    --dark: #0b2233;
+}
+
+/* MENU */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 18px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(4,18,30,.92);
+    backdrop-filter: blur(15px);
+    z-index: 1000;
+    border-bottom: 1px solid #31e5ee33;
+}
+
+.logo {
+    color: var(--blue);
+    font-size: 25px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: .3s;
+    font-weight: 500;
+}
+
+nav a:hover { color: var(--blue); }
+
+/* HERO */
+.hero {
+    min-height: 100vh;
+    padding: 130px 8% 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    background:
+    radial-gradient(circle at 75% 40%, #087b91 0%, transparent 40%),
+    linear-gradient(120deg,#061522,#103a50);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    max-width: 580px;
+    z-index: 2;
+    animation: slideIn 1.2s ease;
+}
+
+.hero h1 {
+    color: var(--blue);
+    font-size: clamp(38px,6vw,65px);
+    line-height: 1.15;
+    margin-bottom: 25px;
+    text-shadow: 0 0 25px #31e5ee66;
+}
+
+.hero p {
+    line-height: 1.9;
+    color: #d0e7ef;
+    font-size: 17px;
+}
+
+.hero img {
+    width: 48%;
+    max-height: 440px;
+    object-fit: cover;
+    border-radius: 25px;
+    box-shadow: 0 0 40px #31e5ee55;
+    border: 2px solid #31e5ee55;
+    animation: float 4s infinite ease-in-out;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 15px 32px;
+    background: var(--blue);
+    color: #061522;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: .3s;
+    cursor: pointer;
+}
+
+.btn:hover {
+    transform: scale(1.06);
+    box-shadow: 0 0 30px var(--blue);
+}
+
+/* ANIMATION */
+@keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-16px); }
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-60px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes glow {
+    0%,100% { box-shadow: 0 0 10px #31e5ee33; }
+    50% { box-shadow: 0 0 30px #31e5ee99; }
+}
+
+@keyframes moveCloud {
+    from { transform: translateX(-150px); }
+    to { transform: translateX(110vw); }
+}
+
+.cloud {
+    position: absolute;
+    top: 17%;
+    font-size: 55px;
+    opacity: .25;
+    animation: moveCloud 35s linear infinite;
+    pointer-events: none;
+}
+
+.cloud.two {
+    top: 35%;
+    animation-duration: 50s;
+}
+
+/* TIÊU ĐỀ */
+.heading {
+    text-align: center;
+    padding: 75px 15px 40px;
+}
+
+.heading h2 {
+    color: var(--blue);
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
+.heading p { color: #b4ccd9; }
+
+/* THẺ THÔNG TIN */
+.grid {
+    padding: 20px 8% 70px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 25px;
+}
+
+.card {
+    background: linear-gradient(145deg,#102e43,#0a1d2e);
+    border: 1px solid #31e5ee44;
+    border-radius: 20px;
+    padding: 30px;
+    cursor: pointer;
+    transition: .4s;
+    animation: glow 4s infinite;
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: var(--blue);
+    box-shadow: 0 0 30px #31e5ee66;
+}
+
+.icon {
+    font-size: 45px;
+    margin-bottom: 18px;
+    display: inline-block;
+    transition: .4s;
+}
+
+.card:hover .icon {
+    transform: scale(1.2) rotate(8deg);
+}
+
+.card h3 {
+    color: var(--blue);
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.card p {
+    color: #c4d8e2;
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+.more {
+    display: inline-block;
+    color: var(--blue);
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* NĂNG LƯỢNG */
+.energy {
+    background: #081c2b;
+    padding-bottom: 70px;
+}
+
+.energy-grid {
+    padding: 20px 8%;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 25px;
+}
+
+.energy-card {
+    background: #102b40;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #31e5ee44;
+    cursor: pointer;
+    transition: .4s;
+}
+
+.energy-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 30px #31e5ee66;
+    border-color: var(--blue);
+}
+
+.energy-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: .5s;
+}
+
+.energy-card:hover img { transform: scale(1.05); }
+
+.energy-card h3 {
+    color: var(--blue);
+    padding: 20px 20px 10px;
+    font-size: 20px;
+}
+
+.energy-card p {
+    color: #c4d8e2;
+    padding: 0 20px 20px;
+    line-height: 1.7;
+    font-size: 15px;
+}
+
+/* HÌNH ẢNH */
+.gallery {
+    padding: 20px 8% 70px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.gallery img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 20px;
+    transition: .4s;
+    border: 2px solid #31e5ee55;
+}
+
+.gallery img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 25px var(--blue);
+}
+
+/* THỐNG KÊ */
+.stats {
+    padding: 65px 8%;
+    background: #102b40;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    text-align: center;
+    gap: 25px;
+    border-top: 1px solid #31e5ee33;
+    border-bottom: 1px solid #31e5ee33;
+}
+
+.stat h2 {
+    font-size: 48px;
+    color: var(--blue);
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.stat p {
+    color: #c4d8e2;
+    font-size: 16px;
+}
+
+/* MODAL THÔNG TIN */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0,0,0,.8);
+    backdrop-filter: blur(8px);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal.show {
+    display: flex;
+    animation: fadeIn .3s;
+}
+
+.modal-box {
+    background: linear-gradient(145deg,#12344b,#071827);
+    border: 1px solid var(--blue);
+    border-radius: 22px;
+    padding: 35px;
+    width: 100%;
+    max-width: 620px;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    animation: pop .4s;
+    box-shadow: 0 0 50px #31e5ee44;
+}
+
+.modal-box h2 {
+    color: var(--blue);
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.modal-box p {
+    color: #d0e4ec;
+    line-height: 1.9;
+    white-space: pre-line;
+    font-size: 15px;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    border: none;
+    background: none;
+    color: white;
+    font-size: 32px;
+    cursor: pointer;
+}
+
+.close:hover { color: var(--blue); }
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes pop {
+    from { transform: scale(.85); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* HIỆN KHI CUỘN */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: .8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* TƯƠNG LAI */
+.future {
+    padding: 90px 10%;
+    text-align: center;
+    background: linear-gradient(120deg,#0b2937,#123b40);
+}
+
+.future h2 {
+    color: var(--blue);
+    font-size: 35px;
+    margin-bottom: 25px;
+}
+
+.future p {
+    color: #d0e4ec;
+    line-height: 2;
+    max-width: 800px;
+    margin: 0 auto 30px;
+    font-size: 17px;
+}
+
+footer {
+    background: #030d16;
+    text-align: center;
+    padding: 30px;
+    color: #8caab8;
+    line-height: 1.8;
+    font-size: 14px;
+}
+
+.top {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    padding: 12px 18px;
+    border-radius: 50%;
+    background: var(--blue);
+    color: #061522;
+    text-decoration: none;
+    font-size: 22px;
+    font-weight: bold;
+    z-index: 900;
+    box-shadow: 0 0 20px var(--blue);
+    transition: .3s;
+}
+
+.top:hover {
+    transform: scale(1.12);
+}
+
+/* ĐIỆN THOẠI */
+@media(max-width:850px) {
+    nav {
+        flex-direction: column;
+        gap: 12px;
+        padding: 15px 4%;
+    }
+
+    nav div:last-child {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    nav a { margin: 4px 8px; font-size: 14px; }
+
+    .hero {
+        flex-direction: column;
+        padding-top: 160px;
+        text-align: center;
+    }
+
+    .hero img { width: 100%; max-height: 300px; }
+
+    .grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media(max-width:550px) {
+    .grid,.energy-grid,.gallery,.stats {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 { font-size: 34px; }
+    .heading h2 { font-size: 26px; }
+    .modal-box { padding: 25px 18px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- MENU -->
+<nav>
+    <div class="logo">🌍 SMART CITY</div>
+    <div>
+        <a href="#home">Trang chủ</a>
+        <a href="#technology">Công nghệ</a>
+        <a href="#energy">Năng lượng</a>
+        <a href="#gallery">Hình ảnh</a>
+        <a href="#future">Tương lai</a>
+    </div>
+</nav>
+
+<!-- TRANG CHỦ -->
+<section class="hero" id="home">
+
+    <div class="cloud">☁️</div>
+    <div class="cloud two">☁️</div>
+
+    <div class="hero-content">
+        <h1>SMART CITY<br>THÀNH PHỐ TƯƠNG LAI</h1>
+
+        <p>
+            Chào mừng đến với thành phố thông minh!
+            Nơi công nghệ hiện đại kết hợp với năng lượng
+            tái tạo, giao thông thông minh và môi trường xanh.
+            Cùng khám phá mô hình đô thị của tương lai.
+        </p>
+
+        <a href="#technology" class="btn">KHÁM PHÁ THÀNH PHỐ →</a>
+    </div>
+
+    <img src="/assets/images/hero_green_living_1793714326448.jpg" onerror="this.src='https://images.unsplash.com/photo-1477959858617-67f30bc75b82?w=1000&auto=format&fit=crop&q=80'" alt="Thành phố thông minh tương lai">
+</section>
+
+<!-- CÔNG NGHỆ -->
+<div class="heading reveal" id="technology">
+    <h2>🏙️ HỆ THỐNG THÀNH PHỐ</h2>
+    <p>Bấm vào từng khu vực để khám phá thông tin chi tiết</p>
+</div>
+
+<section class="grid">
+
+    <div class="card reveal" onclick="showInfo('solar')">
+        <div class="icon">☀️</div>
+        <h3>Năng lượng mặt trời</h3>
+        <p>Sử dụng ánh sáng mặt trời để tạo ra điện sạch.</p>
+        <span class="more">Xem chi tiết →</span>
+    </div>
+
+    <div class="card reveal" onclick="showInfo('traffic')">
+        <div class="icon">🚄</div>
+        <h3>Giao thông thông minh</h3>
+        <p>Hệ thống tàu điện và phương tiện hiện đại.</p>
+        <span class="more">Xem chi tiết →</span>
+    </div>
+
+    <div class="card reveal" onclick="showInfo('building')">
+        <div class="icon">🏢</div>
+        <h3>Tòa nhà thông minh</h3>
+        <p>Ứng dụng tự động hóa trong các công trình.</p>
+        <span class="more">Xem chi tiết →</span>
+    </div>
+
+    <div class="card reveal" onclick="showInfo('wind')">
+        <div class="icon">🌬️</div>
+        <h3>Năng lượng gió</h3>
+        <p>Sản xuất điện từ nguồn năng lượng gió.</p>
+        <span class="more">Xem chi tiết →</span>
+    </div>
+
+    <div class="card reveal" onclick="showInfo('environment')">
+        <div class="icon">🌳</div>
+        <h3>Môi trường xanh</h3>
+        <p>Phát triển cây xanh và bảo vệ hệ sinh thái.</p>
+        <span class="more">Xem chi tiết →</span>
+    </div>
+
+    <div class="card reveal" onclick="showInfo('lighting')">
+        <div class="icon">💡</div>
+        <h3>Đèn đường thông minh</h3>
+        <p>Tự động điều chỉnh ánh sáng để tiết kiệm điện.</p>
+        <span class="more">Xem chi tiết →</span>
+    </div>
+
+</section>
+
+<!-- NĂNG LƯỢNG TÁI TẠO -->
+<section class="energy" id="energy">
+
+    <div class="heading reveal">
+        <h2>⚡ NĂNG LƯỢNG TÁI TẠO</h2>
+        <p>Những nguồn năng lượng sạch cho thành phố tương lai</p>
+    </div>
+
+    <div class="energy-grid">
+
+        <div class="energy-card reveal" onclick="showInfo('solar')">
+            <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&auto=format&fit=crop&q=80" alt="Pin mặt trời">
+            <h3>☀️ Năng lượng mặt trời</h3>
+            <p>Tận dụng ánh nắng để tạo điện cho các công trình.</p>
+        </div>
+
+        <div class="energy-card reveal" onclick="showInfo('wind')">
+            <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&auto=format&fit=crop&q=80" alt="Tua-bin gió">
+            <h3>🌬️ Năng lượng gió</h3>
+            <p>Sử dụng tua-bin để chuyển đổi sức gió thành điện.</p>
+        </div>
+
+        <!-- ĐẬP THỦY ĐIỆN -->
+        <div class="energy-card reveal" onclick="showInfo('water')">
+            <img src="/assets/images/hydroelectric_dam.jpg" onerror="this.src='https://images.unsplash.com/photo-1579275542618-a1dfed5f54ba?w=800&auto=format&fit=crop&q=80'" alt="Đập thủy điện">
+            <h3>💧 Đập thủy điện</h3>
+            <p>Khai thác sức nước qua đập ngăn dòng và tua-bin để sản xuất nguồn điện sạch dồi dào.</p>
+        </div>
+
+        <div class="energy-card reveal" onclick="showInfo('building')">
+            <img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=800&auto=format&fit=crop&q=80" alt="Công trình xanh">
+            <h3>🌳 Công trình xanh</h3>
+            <p>Thiết kế tiết kiệm năng lượng và gần gũi thiên nhiên.</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- HÌNH ẢNH THÀNH PHỐ -->
+<div class="heading reveal" id="gallery">
+    <h2>🌆 HÌNH ẢNH THÀNH PHỐ</h2>
+    <p>Mô hình đô thị thông minh trong tương lai</p>
+</div>
+
+<section class="gallery">
+    <img class="reveal" src="https://images.unsplash.com/photo-1519501025264-65ba15a82390?w=1000&auto=format&fit=crop&q=80" alt="Đô thị thông minh hiện đại">
+    <img class="reveal" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1000&auto=format&fit=crop&q=80" alt="Trung tâm công nghệ xanh">
+</section>
+
+<!-- THỐNG KÊ -->
+<section class="stats reveal">
+
+    <div class="stat">
+        <h2 class="counter" data-target="100">0</h2>
+        <p>Hướng đến năng lượng sạch (%)</p>
+    </div>
+
+    <div class="stat">
+        <h2 class="counter" data-target="24">0</h2>
+        <p>Giám sát đô thị (giờ/ngày)</p>
+    </div>
+
+    <div class="stat">
+        <h2 class="counter" data-target="2035">0</h2>
+        <p>Mốc mục tiêu tương lai</p>
+    </div>
+
+</section>
+
+<!-- TƯƠNG LAI -->
+<section class="future reveal" id="future">
+    <h2>🌍 TƯƠNG LAI XANH BẮT ĐẦU TỪ HÔM NAY</h2>
+
+    <p>
+        Thành phố thông minh không chỉ là nơi có những
+        công nghệ hiện đại mà còn là nơi con người biết
+        sử dụng tài nguyên hợp lý, tiết kiệm năng lượng,
+        bảo vệ môi trường và xây dựng cộng đồng văn minh.
+
+        Hãy cùng chung tay xây dựng một tương lai xanh,
+        sạch và phát triển bền vững.
+    </p>
+
+    <a href="#home" class="btn">QUAY LẠI ĐẦU TRANG ↑</a>
+</section>
+
+<footer>
+    © 2026 SMART CITY
+    <br>
+    THÀNH PHỐ THÔNG MINH - VÌ MỘT TƯƠNG LAI XANH 🌍
+</footer>
+
+<a href="#home" class="top">↑</a>
+
+<!-- CỬA SỔ CHI TIẾT (MODAL) -->
+<div class="modal" id="modal" onclick="closeOutside(event)">
+    <div class="modal-box">
+        <button class="close" onclick="closeModal()">×</button>
+        <h2 id="modalTitle"></h2>
+        <p id="modalText"></p>
+    </div>
+</div>
+
+<script>
+
+// THÔNG TIN CHI TIẾT
+const information = {
+
+solar: {
+    title: "☀️ NĂNG LƯỢNG MẶT TRỜI",
+    text: `Năng lượng mặt trời là nguồn năng lượng tái tạo được lấy từ ánh sáng và nhiệt của mặt trời.
+
+CÁCH HOẠT ĐỘNG:
+• Tấm pin mặt trời hấp thụ ánh sáng.
+• Chuyển đổi ánh sáng thành điện năng.
+• Điện được sử dụng cho nhà ở, trường học và công trình.
+
+ỨNG DỤNG:
+• Lắp đặt pin trên mái nhà.
+• Cung cấp điện cho hệ thống đèn đường.
+• Sạc các phương tiện điện.
+
+LỢI ÍCH:
+• Giảm sử dụng nhiên liệu hóa thạch.
+• Hạn chế khí thải gây ô nhiễm.
+• Tiết kiệm chi phí điện lâu dài.`
+},
+
+wind: {
+    title: "🌬️ NĂNG LƯỢNG GIÓ",
+    text: `Năng lượng gió sử dụng sức gió để vận hành tua-bin và tạo ra điện năng.
+
+CÁCH HOẠT ĐỘNG:
+• Gió làm quay cánh quạt.
+• Cánh quạt làm quay máy phát điện.
+• Điện được đưa vào hệ thống cung cấp điện.
+
+ỨNG DỤNG:
+• Trang trại điện gió ngoài khơi và trên đồi.
+• Cung cấp điện cho khu dân cư.
+• Kết hợp với điện mặt trời.
+
+LỢI ÍCH:
+• Nguồn năng lượng vô tận và tái tạo.
+• Không đốt nhiên liệu khi phát điện.
+• Giảm phát thải khí nhà kính.`
+},
+
+water: {
+    title: "💧 ĐẬP THỦY ĐIỆN & NĂNG LƯỢNG NƯỚC",
+    text: `Đập thủy điện khai thác thế năng và động năng của dòng nước để vận hành tua-bin và tạo ra nguồn điện năng sạch.
+
+CÁCH HOẠT ĐỘNG:
+• Đập ngăn dòng tích trữ lượng nước lớn ở hồ chứa.
+• Cửa xả dẫn dòng nước áp lực cao qua đường ống ngầm.
+• Dòng nước làm quay tua-bin và kích hoạt máy phát điện.
+• Điện được truyền trực tiếp vào mạng lưới đô thị.
+
+ỨNG DỤNG:
+• Các nhà máy thủy điện lớn và vừa.
+• Hệ thống cung cấp điện sạch cho các trạm sạc xe điện.
+• Kết hợp điều tiết lũ lụt và tưới tiêu nông nghiệp.
+
+LỢI ÍCH:
+• Nguồn năng lượng tái tạo liên tục theo chu trình nước.
+• Không đốt nhiên liệu hóa thạch, không phát sinh khói bụi.
+• Hồ chứa hỗ trợ điều hòa nguồn nước sinh hoạt trong mùa khô.`
+},
+
+traffic: {
+    title: "🚄 GIAO THÔNG THÔNG MINH",
+    text: `Giao thông thông minh sử dụng công nghệ để quản lý và cải thiện hoạt động đi lại trong đô thị.
+
+CÁC HỆ THỐNG:
+• Tàu điện trên cao và metro ngầm.
+• Xe buýt điện không phát thải.
+• Đèn tín hiệu giao thông tự động điều phối theo mật độ.
+• Hệ thống camera AI giám sát giao thông thời gian thực.
+
+LỢI ÍCH:
+• Giảm thiểu tình trạng ùn tắc giao thông.
+• Cắt giảm khí thải độc hại từ khói xe.
+• Tiết kiệm thời gian và chi phí đi lại.
+• Nâng cao an toàn cho người tham gia giao thông.`
+},
+
+building: {
+    title: "🏢 TÒA NHÀ THÔNG MINH",
+    text: `Tòa nhà thông minh ứng dụng công nghệ tự động hóa và IoT để quản lý hoạt động của công trình.
+
+CÁC HỆ THỐNG:
+• Điều khiển ánh sáng và nhiệt độ tự động.
+• Hệ thống kính hấp thụ năng lượng mặt trời.
+• Hệ thống tái chế và tiết kiệm nước mưa.
+• Quản lý thông gió tự nhiên thông minh.
+
+LỢI ÍCH:
+• Giảm 30-50% mức tiêu thụ điện năng.
+• Tạo môi trường sống và làm việc tiện nghi.
+• Tối ưu hóa chi phí vận hành tòa nhà.
+• Góp phần bảo vệ môi trường sinh thái.`
+},
+
+environment: {
+    title: "🌳 MÔI TRƯỜNG XANH",
+    text: `Môi trường xanh là nền tảng cốt lõi trong việc xây dựng thành phố thông minh bền vững.
+
+GIẢI PHÁP:
+• Tăng tỷ lệ cây xanh, công viên và vườn trên mái.
+• Phân loại rác tại nguồn và tái chế rác hữu cơ.
+• Xử lý 100% nước thải trước khi ra môi trường.
+• Khuyến khích phương tiện giao thông thuần điện.
+
+LỢI ÍCH:
+• Cải thiện chất lượng không khí, lọc bụi mịn.
+• Giảm hiệu ứng đảo nhiệt đô thị.
+• Bảo vệ đa dạng sinh học và nguồn nước.
+• Nâng cao sức khỏe và tuổi thọ cư dân.`
+},
+
+lighting: {
+    title: "💡 ĐÈN ĐƯỜNG THÔNG MINH",
+    text: `Đèn đường thông minh ứng dụng cảm biến chuyển động và ánh sáng môi trường.
+
+CÁCH HOẠT ĐỘNG:
+• Cảm biến nhận diện ánh sáng ban ngày và ban đêm.
+• Tự động tăng độ sáng khi có phương tiện/người đi qua và giảm sáng khi vắng người.
+• Tích hợp camera giám sát và trạm đo chất lượng không khí.
+
+LỢI ÍCH:
+• Tiết kiệm tới 60% điện năng chiếu sáng công cộng.
+• Giảm chi phí bảo trì nhờ hệ thống cảnh báo hỏng tự động.
+• Tăng cường an ninh trật tự ban đêm.`
+}
+
+};
+
+// MỞ MODAL THÔNG TIN
+function showInfo(type) {
+    const item = information[type];
+    if (!item) return;
+
+    document.getElementById("modalTitle").innerText = item.title;
+    document.getElementById("modalText").innerText = item.text;
+
+    document.getElementById("modal").classList.add("show");
+    document.body.style.overflow = "hidden";
+}
+
+// ĐÓNG MODAL
+function closeModal() {
+    document.getElementById("modal").classList.remove("show");
+    document.body.style.overflow = "";
+}
+
+function closeOutside(event) {
+    if (event.target.id === "modal") {
+        closeModal();
+    }
+}
+
+// ĐÓNG BẰNG PHÍM ESC
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") closeModal();
+});
+
+// HIỆU ỨNG HIỆN KHI CUỘN (SCROLL REVEAL)
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("active");
+        }
+    });
+}, {threshold: 0.12});
+
+document.querySelectorAll(".reveal").forEach(element => {
+    observer.observe(element);
+});
+
+// SỐ ĐẾM TỰ ĐỘNG (COUNTER)
+const counters = document.querySelectorAll(".counter");
+
+const counterObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const counter = entry.target;
+            const target = Number(counter.dataset.target);
+            let current = 0;
+            const step = Math.max(1, Math.ceil(target / 60));
+
+            const timer = setInterval(() => {
+                current += step;
+
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+
+                counter.innerText = current.toLocaleString("vi-VN");
+            }, 30);
+
+            counterObserver.unobserve(counter);
+        }
+    });
+}, {threshold: 0.5});
+
+counters.forEach(counter => {
+    counterObserver.observe(counter);
+});
+
+</script>
+
+</body>
+</html>
